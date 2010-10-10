@@ -1,0 +1,1 @@
+This is translation tool that should translate phrases by selecting them (in browser) and pushing a hotkey
