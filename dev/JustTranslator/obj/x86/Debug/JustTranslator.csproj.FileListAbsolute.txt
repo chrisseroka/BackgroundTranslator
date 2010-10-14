@@ -30,3 +30,5 @@ E:\SCM\JustTranslator\JustTranslator\bin\Debug\Newtonsoft.Json.dll
 E:\SCM\JustTranslator\JustTranslator\bin\Debug\GoogleTranslateAPI.pdb
 E:\SCM\JustTranslator\JustTranslator\bin\Debug\GoogleTranslateAPI.xml
 E:\SCM\JustTranslator\JustTranslator\bin\Debug\Newtonsoft.Json.xml
+E:\Projects\BackgroundTranslator\dev\JustTranslator\obj\x86\Debug\JustTranslator.exe
+E:\Projects\BackgroundTranslator\dev\JustTranslator\obj\x86\Debug\JustTranslator.pdb

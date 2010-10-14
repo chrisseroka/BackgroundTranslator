@@ -1,0 +1,16 @@
+E:\Projects\BackgroundTranslator\dev\JustTranslator\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\Projects\BackgroundTranslator\dev\JustTranslator\obj\x86\Debug\JustTranslator.AboutForm.resources
+E:\Projects\BackgroundTranslator\dev\JustTranslator\obj\x86\Debug\JustTranslator.Properties.Resources.resources
+E:\Projects\BackgroundTranslator\dev\JustTranslator\obj\x86\Debug\JustTranslator.TranslationResultForm.resources
+E:\Projects\BackgroundTranslator\dev\JustTranslator\obj\x86\Debug\GenerateResource.read.1.tlog
+E:\Projects\BackgroundTranslator\dev\JustTranslator\obj\x86\Debug\GenerateResource.write.1.tlog
+E:\Projects\BackgroundTranslator\dev\JustTranslator\obj\x86\Debug\JustTranslator.exe
+E:\Projects\BackgroundTranslator\dev\JustTranslator\bin\Debug\JustTranslator.exe
+E:\Projects\BackgroundTranslator\dev\JustTranslator\bin\Debug\JustTranslator.pdb
+E:\Projects\BackgroundTranslator\dev\JustTranslator\bin\Debug\GoogleTranslateAPI.dll
+E:\Projects\BackgroundTranslator\dev\JustTranslator\bin\Debug\Newtonsoft.Json.dll
+E:\Projects\BackgroundTranslator\dev\JustTranslator\bin\Debug\GoogleTranslateAPI.pdb
+E:\Projects\BackgroundTranslator\dev\JustTranslator\bin\Debug\GoogleTranslateAPI.xml
+E:\Projects\BackgroundTranslator\dev\JustTranslator\bin\Debug\Newtonsoft.Json.xml
+E:\Projects\BackgroundTranslator\dev\JustTranslator\obj\x86\Debug\JustTranslator.pdb
+E:\Projects\BackgroundTranslator\dev\JustTranslator\bin\Debug\NHotKey.dll

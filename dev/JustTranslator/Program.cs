@@ -15,7 +15,7 @@ namespace JustTranslator
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainAbout());
+            Application.Run(new Core());
         }
     }
 }
