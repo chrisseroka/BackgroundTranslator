@@ -12,13 +12,30 @@ namespace JustTranslator
 {
     public class Core: System.Windows.Forms.ApplicationContext
     {
-        Thread translationThread;
         Translator translator;
-        AboutForm aboutForm = new AboutForm();
-        TranslationResultForm translationResultForm = new TranslationResultForm();
+        IWindowView aboutForm;
+        IWindowView AboutForm
+        {
+            get { if (aboutForm == null) aboutForm = new AboutForm(); return this.aboutForm; }
+        }
+
+        ITranslatorView translationResultForm;
+        ITranslatorView TranslationResultForm
+        {
+            get
+            {
+                if (translationResultForm == null)
+                { translationResultForm = new TranslationResultForm();
+                this.translationResultForm.Translate += new EventHandler(translationResultForm_Translate);
+                } return this.translationResultForm;
+            }
+        }
+
         NotifyIconContainer notifyIconContainer;
         string lastClipboardText;
         NHotKeyManager hotKeyManager;
+        Language srcLang = Language.English;
+        Language dstLang = Language.Polish;
 
         public Core()
         {
@@ -26,7 +43,25 @@ namespace JustTranslator
             this.translator = new Translator();
             this.notifyIconContainer = new JustTranslator.Views.NotifyIconContainer();
             //this.StartTranslationLoop();
-            this.hotKeyManager.AddHotKey(new HotKey { Key = Keys.F10, KeyModifiers = KeyModifiers.Control }, new EventHandler(this.OnTranslate));
+            this.hotKeyManager.AddHotKey(new HotKey { Key = Keys.T, KeyModifiers = KeyModifiers.Control | KeyModifiers.Windows }, 
+                new EventHandler(this.OnTranslate));
+            this.hotKeyManager.AddHotKey(new HotKey
+            {
+                Key = Keys.T,
+                KeyModifiers = NHotKey.KeyModifiers.Windows |
+                               NHotKey.KeyModifiers.Control |
+                               NHotKey.KeyModifiers.Shift
+            },new EventHandler(this.OnShowTranslationWindow));
+        }
+
+        void translationResultForm_Translate(object sender, EventArgs e)
+        {
+            this.Translate(this.TranslationResultForm.TextToTranslate, this.srcLang, this.dstLang);
+        }
+
+        void OnShowTranslationWindow(object sender, EventArgs e)
+        {
+            this.TranslationResultForm.Show();
         }
 
         private static bool IsPhraseToTranslate(string s)
@@ -48,18 +83,23 @@ namespace JustTranslator
                 return null;
         }
 
-        public void ShowTranslationResult(string result)
+        public void ShowTranslationResult(string origin, string result)
         {
-            this.translationResultForm.ShowTranslation(result);
+            this.TranslationResultForm.TextTranslated = result;
+            this.TranslationResultForm.TextToTranslate = origin;
+
+            this.TranslationResultForm.Show();
+        }
+
+        private void Translate(string txt, Language srcLang, Language dstLang)
+        {
+            string result = this.translator.Translate(txt, srcLang, dstLang);
+            this.ShowTranslationResult(txt, result);
         }
 
         protected void OnTranslate(object sender, EventArgs e)
         {
-            Language srcLang = Language.English;
-            Language dstLang = Language.Polish;
-
             string txt = null;
-            string result;
 
             txt = GetClipboardText();
             //Check if there is new phrase to translate
@@ -69,8 +109,7 @@ namespace JustTranslator
                 //Store translation result
                 this.lastClipboardText = txt;
                 //Translate
-                result = this.translator.Translate(txt, srcLang, dstLang);
-                this.ShowTranslationResult(result);
+                this.Translate(txt, this.srcLang, this.dstLang);
             }
         }
     }

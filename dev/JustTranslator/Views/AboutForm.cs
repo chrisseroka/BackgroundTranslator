@@ -12,7 +12,7 @@ using System.Text.RegularExpressions;
 
 namespace JustTranslator
 {
-    public partial class AboutForm : Form
+    public partial class AboutForm : Form, IWindowView
     {
         public AboutForm()
         {

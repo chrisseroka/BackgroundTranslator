@@ -9,22 +9,8 @@ using System.Windows.Forms;
 
 namespace JustTranslator
 {
-    public partial class TranslationResultForm : Form
+    public partial class TranslationResultForm : Form, ITranslatorView
     {
-        public void ShowTranslation(string txt)
-        {
-            this.lblResult.Text = txt;
-            this.Hide();       
-            this.Show();
-
-            this.Width = lblResult.Width + 20;
-            this.Height = lblResult.Height + 20;
-            this.Location = System.Windows.Forms.Cursor.Position;
-            this.Show();
-            this.Hide();
-            this.Location = System.Windows.Forms.Cursor.Position;
-            this.Show();
-        }
 
         public TranslationResultForm()
         {
@@ -32,12 +18,52 @@ namespace JustTranslator
             this.ShowInTaskbar = false;
         }
 
-        private void TranslationResultForm_MouseMove(object sender, MouseEventArgs e)
+        private void txtSource_KeyUp(object sender, KeyEventArgs e)
         {
-            //It is invoked after Show() so check condition;
-            if (e.X != 0 && e.Y != 0)
+            if ((e.KeyCode == Keys.Enter || e.KeyCode == Keys.Enter)
+                 && e.Modifiers == Keys.None
+                 && this.Translate != null)
+                this.Translate(this, new EventArgs());
+            else if (e.KeyCode == Keys.Escape && e.Modifiers == Keys.None)
                 this.Hide();
         }
 
+        public event EventHandler Translate;
+
+        string ITranslatorView.TextToTranslate
+        {
+            get
+            {
+                return this.txtSource.Text;
+            }
+            set
+            {
+                this.txtSource.Text = value;
+            }
+        }
+
+        string ITranslatorView.TextTranslated
+        {
+            get
+            {
+                return this.txtDestination.Text;
+            }
+            set
+            {
+                this.txtDestination.Text = value;
+            }
+        }
+
+        private void TranslationResultForm_Deactivate(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
+
+        private void TranslationResultForm_LocationChanged(object sender, EventArgs e)
+        {
+            this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Right - this.Size.Width,
+Screen.PrimaryScreen.WorkingArea.Bottom - this.Size.Height);
+
+        }
     }
 }
